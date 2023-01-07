@@ -1,0 +1,32 @@
+$dark: #000 !important;
+$darker: #111 !important;
+$dark-medium: #333 !important;
+$dark-low: #666 !important;
+$light-low: #999 !important;
+$light-medium: #ddd !important;
+$lighter: #ececec !important;
+$light: #fff !important;
+$red: #BB2D3B !important;
+$green: #157347 !important;
+
+$featured: #ff9900 !important;
+$featured-dark: #d68100 !important;
+
+$edit-pentil: #0D6EFD !important;
+
+:root {
+  --dark: #{$dark};
+  --darker: #{$darker};
+  --dark-medium: #{$dark-medium};
+  --dark-low: #{$dark-low};
+  --light-low: #{$light-low};
+  --light-medium: #{$light-medium};
+  --lighter: #{$lighter};
+  --light: #{$light};
+  --featured: #{$featured};
+  --featured-dark: #{$featured-dark};
+  --edit-pentil: #{$edit-pentil};
+  --red: #{$red};
+  --green: #{$green};
+
+}

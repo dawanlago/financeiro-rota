@@ -1,32 +1,48 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
+    <base-spinner />
+    <layout-navigation v-if="isLogged" />
+    <router-view />
   </div>
 </template>
 
+<script>
+import BaseSpinner from './components/global/BaseSpinner'
+import LayoutNavigation from './components/layout/LayoutNavigation'
+
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
+
+export default {
+  name: 'app',
+  components: {
+    BaseSpinner,
+    LayoutNavigation
+  },
+  data: () => {
+    return { isLogged: false }
+  },
+  mounted () {
+    const auth = getAuth()
+
+    onAuthStateChanged(auth, user => {
+      window.uid = user ? user.uid : null
+      this.isLogged = !!user
+
+      this.$router.push({ name: window.uid ? 'home' : 'login' })
+
+      setTimeout(() => {
+        this.$root.$emit('Spinner::hide')
+      }, 300)
+    })
+  }
+
+}
+</script>
+
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+  min-height: 100vh;
+  color: var(--dark-medium);
+  background-color: var(--light);
 }
 </style>

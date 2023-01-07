@@ -14,6 +14,18 @@
       "dom",
       "dom.iterable",
       "scripthost"
+    ],
+  },
+  "vueCompilerOptions": {
+    "target": 2.7,
+    "extensions": [
+      ".vue"
     ]
-  }
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.js",
+    "src/**/*.vue",
+  ],
 }
