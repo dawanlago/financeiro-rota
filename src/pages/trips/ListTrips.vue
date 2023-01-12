@@ -3,10 +3,10 @@
     <h1 class='title text-center'>Lista de viagens</h1>
     <div class='content'>
       <button class='btn btn-primary' type="button" data-toggle="modal" @click="modalShow = true"
-        data-target="#exampleModal">
+        data-target="#newTrip">
         Nova viagem
       </button>
-      <table class='table'>
+      <table class='table table-hover'>
         <thead>
           <tr>
             <th scope='col'>Placa</th>
@@ -33,12 +33,12 @@
         </tbody>
       </table>
     </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="newTrip" tabindex="-1" role="dialog" aria-labelledby="newTripModalLabel"
       aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <h5 class="modal-title" id="newTripModalLabel">Nova viagem</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -46,26 +46,30 @@
           <div class="modal-body">
             <form action='#' class='row'>
               <div class='form-group mb-2 col-12'>
-                <input required v-model='trip.origin' type='text' class='form-control' placeholder='Origem' />
+                <label class="form-label">Origem</label>
+                <input required v-model='trip.origin' type='text' class='form-control' />
               </div>
               <div class='form-group mb-2 col-12'>
-                <input required v-model='trip.destiny' type='text' class='form-control' placeholder='Destino' />
+                <label class="form-label">Destino</label>
+                <input required v-model='trip.destiny' type='text' class='form-control' />
               </div>
               <div class='form-group mb-2 col-12'>
-                <input required v-model='trip.licensePlate' type='text' class='form-control' placeholder='Placa' />
+                <label class="form-label">Placa</label>
+                <input required v-model='trip.licensePlate' type='text' class='form-control' />
               </div>
               <div class='form-group mb-2 col-12'>
-                <input v-model='trip.dateInitial' type='text' class='form-control' placeholder='Data de saída' />
+                <label class="form-label">Data de saída</label>
+                <input v-model='trip.dateInitial' type='text' class='form-control' />
               </div>
               <div class='form-group mb-2 col-12'>
-                <input v-model='trip.dateFinal' type='text' class='form-control'
-                  placeholder='Data de chegada (Opcional)' />
+                <label class="form-label">Data de chegada (opicional)</label>
+                <input v-model='trip.dateFinal' type='text' class='form-control' />
               </div>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" id="exit" data-dismiss="modal">Cancelar</button>
-            <button @click='handleSaveTrip()' class='btn btn-primary bottom-0 end-0'>
+            <button class='btn btn-primary bottom-0 end-0' @click="handleSaveTrip">
               Salvar
             </button>
           </div>
@@ -94,9 +98,6 @@ export default {
     }
   },
   methods: {
-    handleTripFinance () {
-      this.$router.push('/trip-finance')
-    },
     async handleSaveTrip () {
       if (this.verifyFields()) {
         try {
@@ -126,7 +127,6 @@ export default {
       })
     },
     verifyFields () {
-      console.log(this.trip)
       if (this.trip.origin === '' || this.trip.destiny === '' || this.trip.dateInitial === '' || this.trip.licensePlate === '') {
         return false
       } else {
@@ -135,7 +135,11 @@ export default {
     }
   },
   async mounted () {
+    this.$root.$emit('Spinner::show')
     this.handleGetTrips()
+    setTimeout(() => {
+      this.$root.$emit('Spinner::hide')
+    }, 300)
   }
 }
 </script>

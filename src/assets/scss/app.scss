@@ -8,10 +8,11 @@
     font-family: 'Avenir', 'Poppins', sans-serif;
 }
 
-.btn,
-.alert,
-.form-control {
-    border-radius: 0 !important;
+
+.btn, .form-control, .form-select {
+  height: 50px;
+  border-color: var(--lighter);
+  border-radius: 5px;
 }
 
 .btn-primary {
