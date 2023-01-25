@@ -13,70 +13,65 @@
         lançamento</button>
     </div>
 
-    <h3 class="text-center">Lançamentos</h3>
-    <div class="row mw-100 container-trip-finance">
-      <div class="card col-8">
-        <div class="card-body">
-          <h5 class="card-title"><span class="material-icons receipt">
-              attach_money
-            </span> Receitas</h5>
+    <div class="row container-trip-finance">
+      <div class="col-12">
+        <h5 class="title"><span class="material-icons receipt">
+            attach_money
+          </span> Receitas</h5>
 
-          <table class='table table-hover'>
-            <thead>
-              <tr>
-                <th width="30%" scope='col'>Data do movimento</th>
-                <th width="50%" scope='col'>Descrição</th>
-                <th width="10%" scope='col'>Valor</th>
-                <th width="10%" scope='col'>Ações</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for='moviment in receiptMoviments' :key='moviment.id'>
-                <th width="30%" scope='row'>{{ moviment.data().dateMoviment }}</th>
-                <td width="50%">{{ moviment.data().description }}</td>
-                <td width="10%">{{
-                  moviment.data().price.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
-                }}</td>
-                <td width="10%">
-                  <i class='fa-solid fa-ban'></i>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <table class='table table-hover'>
+          <thead>
+            <tr>
+              <th width="30%" scope='col'>Data do movimento</th>
+              <th width="50%" scope='col'>Descrição</th>
+              <th width="10%" scope='col'>Valor</th>
+              <th width="10%" scope='col'>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for='moviment in receiptMoviments' :key='moviment.id'>
+              <th width="30%" scope='row'>{{ moviment.data().dateMoviment }}</th>
+              <td width="50%">{{ moviment.data().description }}</td>
+              <td width="10%">{{
+                moviment.data().price.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
+              }}</td>
+              <td width="10%">
+                <i class='fa-solid fa-ban'></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
-        </div>
       </div>
-      <div class="card col-8 container-expense">
-        <div class="card-body">
-          <h5 class="card-title">
-            <span class="material-icons expense">
-              money_off_csred
-            </span> Despesas
-          </h5>
-          <table class='table table-hover'>
-            <thead>
-              <tr>
-                <th scope='col' width="30%">Data do movimento</th>
-                <th scope='col' width="50%">Descrição</th>
-                <th scope='col' width="10%">Valor</th>
-                <th scope='col' width="10%">Ações</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for='moviment in expenseMoviments' :key='moviment.id'>
-                <th width="30%" scope='row'>{{ moviment.data().dateMoviment }}</th>
-                <td width="50%">{{ moviment.data().description }}</td>
-                <td width="10%">{{
-                  moviment.data().price.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
-                }}</td>
-                <td width="10%">
-                  <i class='fa-solid fa-ban'></i>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+      <div class="col-12 container-expense">
+        <h5 class="card-title">
+          <span class="material-icons expense">
+            money_off_csred
+          </span> Despesas
+        </h5>
+        <table class='table table-hover'>
+          <thead>
+            <tr>
+              <th scope='col' width="30%">Data do movimento</th>
+              <th scope='col' width="50%">Descrição</th>
+              <th scope='col' width="10%">Valor</th>
+              <th scope='col' width="10%">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for='moviment in expenseMoviments' :key='moviment.id'>
+              <th width="30%" scope='row'>{{ moviment.data().dateMoviment }}</th>
+              <td width="50%">{{ moviment.data().description }}</td>
+              <td width="10%">{{
+                moviment.data().price.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
+              }}</td>
+              <td width="10%">
+                <i class='fa-solid fa-ban'></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
-        </div>
       </div>
     </div>
     <div class="col-12 container-result">
@@ -84,8 +79,8 @@
         <h5 class="card-title"><span class="material-icons result">
             account_balance_wallet
           </span> Resultado</h5>
-        <h5>{{ result.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) }}</h5>
       </div>
+      <h5>{{ result.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) }}</h5>
     </div>
     <div class="modal fade" id="newTripFinance" tabindex="-1" role="dialog" aria-labelledby="newTripFinanceModalLabel"
       aria-hidden="true">
@@ -101,8 +96,7 @@
             <form action='#' class='row'>
               <div class='form-group mb-2 col-12'>
                 <label class="form-label">Tipo</label>
-                <select class="form-select col-12"
-                  v-model="newFinance.type">
+                <select class="form-select col-12" v-model="newFinance.type">
                   <option value="1">Receita</option>
                   <option value="2">Despesa</option>
                   <option value="3">Adiantamento</option>
@@ -110,7 +104,7 @@
               </div>
               <div class='form-group mb-2 col-12'>
                 <label class="form-label">Valor</label>
-                <input required v-model='newFinance.price' type='text' class='form-control' />
+                <money v-model="newFinance.price" v-bind="money" class='form-control'></money>
               </div>
               <div class='form-group mb-2 col-12'>
                 <label class="form-label">Descrição</label>
@@ -118,7 +112,7 @@
               </div>
               <div class='form-group mb-2 col-12'>
                 <label class="form-label">Data do movimento</label>
-                <input v-model='newFinance.dateMoviment' type='text' class='form-control' />
+                <input v-model='newFinance.dateMoviment' type='text' class='form-control' v-mask="'##/##/####'" />
               </div>
             </form>
           </div>
@@ -155,13 +149,20 @@ export default {
         description: '',
         dateMoviment: ''
       },
+      money: {
+        decimal: ',',
+        thousands: '.',
+        prefix: 'R$ ',
+        precision: 2,
+        masked: false
+      },
       receiptMoviments: [],
       expenseMoviments: [],
       result: 0
     }
   },
   methods: {
-    async handleSaveTripFinance () {
+    async handleSaveTripFinance() {
       if (this.verifyFields()) {
         try {
           const { idTrip, type, price, description, dateMoviment } = this.newFinance
@@ -173,13 +174,14 @@ export default {
             dateMoviment
           })
           this.getMoviments()
+          this.newFinance = {}
           document.getElementById('exit').click()
         } catch (error) {
           console.log('Erro ao atualização:' + error.message)
         }
       }
     },
-    verifyFields () {
+    verifyFields() {
       const { idTrip, type, price, description, dateMoviment } = this.newFinance
       if (idTrip === '' || type === '' || price === '' || description === '' || dateMoviment === '') {
         return false
@@ -187,7 +189,7 @@ export default {
         return true
       }
     },
-    async getTrip () {
+    async getTrip() {
       this.idTrip = this.$route.params.id
       const querySnapshot = await getDocs(collection(db, 'trips'))
       querySnapshot.forEach((doc) => {
@@ -201,7 +203,7 @@ export default {
         }
       })
     },
-    async getMoviments () {
+    async getMoviments() {
       this.expenseMoviments = []
       this.receiptMoviments = []
       const q = query(collection(db, 'financial'), where('idTrip', '==', this.idTrip))
@@ -219,7 +221,7 @@ export default {
       })
     }
   },
-  async mounted () {
+  async mounted() {
     this.$root.$emit('Spinner::show')
     this.getTrip()
     this.getMoviments()
@@ -227,7 +229,7 @@ export default {
       this.$root.$emit('Spinner::hide')
     }, 300)
   },
-  destroyed () {
+  destroyed() {
     this.newFinance.idTrip = ''
   }
 }
@@ -270,16 +272,10 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
-  margin-bottom: 100px;
+  margin: 30px;
 }
 
-.card {
-  background-color: var(--lighter-10);
-  margin-bottom: 10px;
-}
-
-.card-title {
+.title {
   display: flex;
   justify-content: baseline;
 }
@@ -295,8 +291,11 @@ export default {
 
 .container-result {
   max-height: 150px !important;
-  background-color: var(--lighter-10);
+  background-color: var(--lighter);
   position: fixed;
+  display: flex;
+  align-items: center;
+  padding: 0 30px;
   bottom: 0;
   left: 0;
   right: 0;

@@ -59,11 +59,11 @@
               </div>
               <div class='form-group mb-2 col-12'>
                 <label class="form-label">Data de saída</label>
-                <input v-model='trip.dateInitial' type='text' class='form-control' />
+                <input v-model='trip.dateInitial' type='text' class='form-control' v-mask="'##/##/####'" />
               </div>
               <div class='form-group mb-2 col-12'>
                 <label class="form-label">Data de chegada (opicional)</label>
-                <input v-model='trip.dateFinal' type='text' class='form-control' />
+                <input v-model='trip.dateFinal' type='text' class='form-control' v-mask="'##/##/####'" />
               </div>
             </form>
           </div>
